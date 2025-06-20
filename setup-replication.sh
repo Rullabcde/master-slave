@@ -47,7 +47,7 @@ CHANGE MASTER TO
 START SLAVE;
 "
 # Create user for read access
-docker exec -i mysql-slave1 mysql -uroot -psiswa -e "
+docker exec -i mysql-slave2 mysql -uroot -psiswa -e "
 CREATE USER 'rullabcd'@'%' IDENTIFIED BY 'rullabcd';
 GRANT SELECT ON *.* TO 'rullabcd'@'%';
 FLUSH PRIVILEGES;
