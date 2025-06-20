@@ -2,11 +2,8 @@
 
 # Test 1: Insert data di Master
 echo "1. Insert data baru di Master..."
-docker exec mysql-master mysql -uroot -psiswa -e "
-USE testdb;
-INSERT INTO employees (name, email, department, salary)
-VALUES ('Test User', 'test@company.com', 'QA', 55000.00);
-"
+echo "1. Insert data baru di Master..."
+docker exec mysql-master mysql -uroot -psiswa -e "USE testdb; INSERT INTO employees (name, email, department, salary) VALUES ('Test Update DUA', 'update@company.com', 'ID', 55000.00);"
 
 sleep 2
 
