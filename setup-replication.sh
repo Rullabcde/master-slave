@@ -18,7 +18,7 @@ docker exec mysql-slave1 mysql -uroot -psiswa -e "
 STOP SLAVE;
 CHANGE MASTER TO
     MASTER_HOST='mysql-master',
-    MASTER_USER='slave',
+    MASTER_USER='slave1',
     MASTER_PASSWORD='siswa',
     MASTER_LOG_FILE='$MASTER_LOG_FILE',
     MASTER_LOG_POS=$MASTER_LOG_POS;
@@ -31,7 +31,7 @@ docker exec mysql-slave2 mysql -uroot -psiswa -e "
 STOP SLAVE;
 CHANGE MASTER TO
     MASTER_HOST='mysql-master',
-    MASTER_USER='slave',
+    MASTER_USER='slave1',
     MASTER_PASSWORD='siswa',
     MASTER_LOG_FILE='$MASTER_LOG_FILE',
     MASTER_LOG_POS=$MASTER_LOG_POS;
