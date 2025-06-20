@@ -3,14 +3,11 @@
 
 # Cek data di Slave 1
 echo "Cek data di Slave 1 sebelum insert..."
-SLAVE1_DATA=$(docker exec -i mysql-slave1 mysql -uroot -psiswa -e "SELECT * FROM testdb.employees;")
-echo "Data di Slave 1:" $SLAVE1_DATA
+docker exec -i mysql-slave1 mysql -uroot -psiswa -e "SELECT * FROM testdb.employees;"
 
 # Cek data di Slave 2
 echo "Cek data di Slave 2 sebelum insert..."
-SLAVE2_DATA=$(docker exec -i mysql-slave2 mysql -uroot -psiswa -e "SELECT * FROM testdb.employees;")
-echo "Data di Slave 2:" $SLAVE2_DATA
-
+docker exec -i mysql-slave2 mysql -uroot -psiswa -e "SELECT * FROM testdb.employees;"
 
 # Insert data di Master
 echo "Insert data baru di Master..."
@@ -20,10 +17,8 @@ sleep 2
 
 # Cek data di Slave 1
 echo "Cek data di Slave 1 setelah insert..."
-SLAVE1_DATA=$(docker exec -i mysql-slave1 mysql -uroot -psiswa -e "SELECT * FROM testdb.employees;")
-echo "Data di Slave 1:" $SLAVE1_DATA
+docker exec -i mysql-slave1 mysql -uroot -psiswa -e "SELECT * FROM testdb.employees;"
 
 # Cek data di Slave 2
 echo "Cek data di Slave 2 setelah insert..."
-SLAVE2_DATA=$(docker exec -i mysql-slave2 mysql -uroot -psiswa -e "SELECT * FROM testdb.employees;")
-echo "Data di Slave 2:" $SLAVE2_DATA
+docker exec -i mysql-slave2 mysql -uroot -psiswa -e "SELECT * FROM testdb.employees;"

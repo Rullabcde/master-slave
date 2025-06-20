@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Tunggu beberapa detik untuk memastikan semua container sudah siap
+sleep 30
+
 # Master Status
 echo "Mendapatkan Master Status..."
 MASTER_STATUS=$(docker exec -i mysql-master mysql -uroot -psiswa -e "SHOW MASTER STATUS\G")
