@@ -1,4 +1,4 @@
-# MySQL Master-Slave Replication on Docker 🐬🐳
+# MySQL Master-Slave Replication on Docker
 
 This project sets up a simple **MySQL replication topology** using Docker. It includes **1 master** and **2 slaves**, where all writes go to the master, and the slaves are **read-only** replicas.
 
