@@ -4,9 +4,9 @@ This project sets up a simple **MySQL replication topology** using Docker. It in
 
 ---
 
-## 🗺️ Topology
+## Architecture
 
-![Topology](topology.png)
+<img src="architecture.png" alt="Topology" width="280"/>
 
 ---
 
@@ -31,7 +31,7 @@ This will create containers for the MySQL master and both slave instances.
 ### 3. Set up replication
 
 ```bash
-./setup-replication
+./script/setup-replication
 ```
 
 This script will configure the slaves to replicate from the master.
@@ -39,7 +39,7 @@ This script will configure the slaves to replicate from the master.
 ### 4. Create a sample database
 
 ```bash
-./create-database
+./script/create-database
 ```
 
 This will create a sample database and table on the master node.
@@ -47,7 +47,9 @@ This will create a sample database and table on the master node.
 ### 5. Test the replication
 
 ```bash
-./test-replication
+./script/test-replication
 ```
 
 This will insert data on the master and verify that it appears on both slave databases.
+
+---
