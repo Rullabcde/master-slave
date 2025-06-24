@@ -1,7 +1,9 @@
 #!/bin/bash
 
-# Create Database for Replication
-echo "Creating Database..."
+GREEN="\033[0;32m"
+NC="\033[0m"
+
+echo -e "${Green}Creating Database${NC}"
 docker exec -i mysql-master mysql -uroot -psiswa -e "
 CREATE DATABASE IF NOT EXISTS testdb;
 USE testdb;
@@ -16,5 +18,5 @@ INSERT INTO employees (name, email, department, salary) VALUES
 ('John Doe', 'john@company.com', 'IT', 75000.00),
 ('Jane Smith', 'jane@company.com', 'HR', 65000.00);
 "
-echo "Database and table created successfully."
+echo -e "${Green}Database and table berhasil dibuat${NC}"
 

@@ -1,10 +1,12 @@
 #!/bin/bash
 
-# Tunggu beberapa detik untuk memastikan semua container sudah siap
+GREEN="\033[0;32m"
+NC="\033[0m"
+
+# Tunggu container siap
 sleep 30
 
-# Master Status
-echo "Mendapatkan Master Status..."
+echo -e "${Green}Mendapatkan Master Status${NC}"
 MASTER_STATUS=$(docker exec -i mysql-master mysql -uroot -psiswa -e "SHOW MASTER STATUS\G")
 echo "$MASTER_STATUS"
 
@@ -16,7 +18,7 @@ echo "Master Log File: $MASTER_LOG_FILE"
 echo "Master Log Position: $MASTER_LOG_POS"
 
 # Setup Slave 1
-echo "Konfigurasi Slave 1"
+echo -e "${Green}Konfigurasi Slave 1${NC}"
 docker exec -i mysql-slave1 mysql -uroot -psiswa -e "
 STOP SLAVE;
 CHANGE MASTER TO
@@ -27,7 +29,7 @@ CHANGE MASTER TO
     MASTER_LOG_POS=$MASTER_LOG_POS;
 START SLAVE;
 "
-# Create user for read access
+# Buat user untuk akses baca
 docker exec -i mysql-slave1 mysql -uroot -psiswa -e "
 CREATE USER 'rullabcd'@'%' IDENTIFIED BY 'rullabcd';
 GRANT SELECT ON *.* TO 'rullabcd'@'%';
@@ -35,7 +37,7 @@ FLUSH PRIVILEGES;
 "
 
 # Setup Slave 2
-echo "Konfigurasi Slave 2"
+echo -e "${Green}Konfigurasi Slave 2${NC}"
 docker exec -i mysql-slave2 mysql -uroot -psiswa -e "
 STOP SLAVE;
 CHANGE MASTER TO
@@ -46,7 +48,7 @@ CHANGE MASTER TO
     MASTER_LOG_POS=$MASTER_LOG_POS;
 START SLAVE;
 "
-# Create user for read access
+# Buat user untuk akses baca
 docker exec -i mysql-slave2 mysql -uroot -psiswa -e "
 CREATE USER 'rullabcd'@'%' IDENTIFIED BY 'rullabcd';
 GRANT SELECT ON *.* TO 'rullabcd'@'%';
@@ -54,8 +56,8 @@ FLUSH PRIVILEGES;
 "
 
 # Cek status replikasi
-echo "Status Replikasi Slave 1"
+echo -e "${Green}Status Replikasi Slave 1${NC}"
 docker exec -i mysql-slave1 mysql -uroot -psiswa -e "SHOW SLAVE STATUS\G" | grep -E "(Slave_IO_Running|Slave_SQL_Running|Seconds_Behind_Master)"
 
-echo "Status Replikasi Slave 2"
+echo -e "${Green}Status Replikasi Slave 2${NC}"
 docker exec -i mysql-slave2 mysql -uroot -psiswa -e "SHOW SLAVE STATUS\G" | grep -E "(Slave_IO_Running|Slave_SQL_Running|Seconds_Behind_Master)"
